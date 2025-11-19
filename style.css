@@ -1,23 +1,103 @@
 /*
- * Style untuk Ucapan Ulang Tahun Julita - Murni CSS Shapes
+ * Style untuk Ucapan Ulang Tahun Julita - Mawar Biru
  */
 
 :root {
     /* Variabel warna */
-    --navy-blue: #020436;      
+    --navy-blue: #020436;     
     --star-color: #ffe082;     
     --text-color: #f0f4f7;     
     --highlight-color: #00e0ff;
     --card-bg: rgba(20, 20, 50, 0.5); 
     --rose-glow: #00ffff; 
     --rose-core: #0a1144; 
-    --petal-color: #0f1c6a; /* Warna kelopak biru gelap */
-    --petal-highlight: #4d90ff; /* Highlight kelopak */
+    --petal-color: #0f1c6a;
+    --petal-highlight: #4d90ff;
 }
 
-/* ... (Bagian BODY, BINTANG, CARD, JUDUL, PESAN, TANDA TANGAN SAMA) ... */
+/* FONT & BODY */
+body {
+    background-color: var(--navy-blue);
+    color: var(--text-color);
+    font-family: 'Playfair Display', serif; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    background: linear-gradient(140deg, #00001a 0%, #020436 70%, #00001a 100%);
+}
 
-/* * EFEK MAWAR MURNI DARI CSS * */
+/* EFEK BINTANG */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 80px 100px, var(--star-color), transparent),
+        radial-gradient(2px 2px at 250px 200px, var(--star-color), transparent),
+        radial-gradient(2px 2px at 400px 50px, var(--star-color), transparent),
+        radial-gradient(2px 2px at 50px 450px, var(--star-color), transparent),
+        radial-gradient(2px 2px at 550px 300px, var(--star-color), transparent),
+        radial-gradient(2px 2px at 700px 80px, var(--star-color), transparent),
+        radial-gradient(2px 2px at 900px 400px, var(--star-color), transparent),
+        radial-gradient(2px 2px at 150px 280px, var(--star-color), transparent);
+    background-repeat: repeat;
+    background-size: 600px 600px; 
+    animation: twinkle 10s infinite alternate;
+    opacity: 0.9;
+    z-index: -1;
+}
+
+/* KARTU & JUDUL */
+.card {
+    background-color: var(--card-bg);
+    padding: 50px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 650px;
+    width: 90%;
+    border: 3px solid var(--highlight-color); 
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.4), 0 0 30px var(--highlight-color) inset;
+    animation: pulse 4s infinite alternate;
+    position: relative;
+    z-index: 1;
+}
+
+.greeting {
+    font-size: 3.2em; 
+    font-weight: 700;
+    color: var(--star-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); 
+    margin-bottom: 30px;
+}
+
+.message {
+    font-size: 1.8em; 
+    line-height: 1.8;
+    margin: 30px 0;
+    font-weight: 400;
+}
+
+.signature {
+    font-size: 1.6em;
+    margin-top: 40px;
+    font-weight: 700;
+}
+
+.message span, .signature span {
+    color: var(--highlight-color); 
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* EFEK MAWAR */
 .css-rose-effect {
     width: 200px; 
     height: 200px;
@@ -25,26 +105,18 @@
     margin: 30px auto;
     display: block;
     position: relative;
-    overflow: hidden; 
-    
+    overflow: hidden;
     background: var(--rose-core); 
-    
-    /* Efek cahaya luar */
     box-shadow: 
         0 0 10px 5px var(--rose-glow),   
         0 0 40px 10px var(--rose-glow),  
         0 0 80px 20px rgba(0, 255, 255, 0.4); 
-
-    /* Tambahkan gradient untuk mensimulasikan kedalaman pusat mawar */
     background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
-    
     animation: glow 3s infinite alternate;
 }
 
-/* --- KELOPAK MAWAR DENGAN PSEUDO ELEMENTS --- */
-
-/* Perlu mengubah z-index kelopak agar foto bisa berada di antaranya */
-/* Kelopak Utama (::before) - Akan berada di lapisan paling belakang */
+/* KELOPAK MAWAR DENGAN PSEUDO ELEMENTS */
+/* Kelopak Belakang (::before) */
 .css-rose-effect::before {
     content: '';
     position: absolute;
@@ -58,11 +130,10 @@
     box-shadow: 
         inset 10px 10px 20px rgba(0, 0, 0, 0.7), 
         inset -5px -5px 10px var(--petal-highlight); 
-    /* Z-index rendah untuk kelopak belakang */
-    z-index: 1;
+    z-index: 1; /* Lapisan paling belakang */
 }
 
-/* Kelopak Tengah (::after) - Akan berada di lapisan tengah, di atas foto */
+/* Kelopak Depan (::after) */
 .css-rose-effect::after {
     content: '';
     position: absolute;
@@ -77,31 +148,54 @@
         inset 5px 5px 15px rgba(0, 0, 0, 0.8), 
         inset -3px -3px 8px var(--petal-highlight);
     background-image: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, transparent 40%);
-    /* Z-index tinggi untuk kelopak depan */
-    z-index: 3; 
+    z-index: 3; /* Lapisan paling depan, di atas foto */
 }
 
-/* --- STYLE BARU UNTUK FOTO DI TENGAH --- */
+/* STYLE UNTUK FOTO DI TENGAH */
 .center-photo {
     position: absolute;
-    /* Atur ukuran gambar (misalnya 50% dari ukuran .css-rose-effect) */
     width: 50%; 
     height: 50%;
-    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
-    object-fit: cover; /* Memastikan gambar mengisi area tanpa terdistorsi */
-    
+    border-radius: 50%; 
+    object-fit: cover;
     /* Pusatkan gambar */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
-    /* Atur Z-index agar berada di antara kelopak depan (::after) dan belakang (::before) */
-    z-index: 2; 
-
-    /* Tambahkan bingkai atau cahaya pada foto agar terlihat lebih menyatu */
+    z-index: 2; /* Lapisan tengah, di antara kelopak */
+    /* Efek bingkai */
     border: 3px solid var(--highlight-color);
     box-shadow: 0 0 10px var(--rose-glow), 0 0 20px rgba(0, 255, 255, 0.5);
 }
 
+/* ANIMASI */
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.4), 0 0 30px var(--highlight-color) inset;
+    }
+    to {
+        transform: scale(1.01);
+        box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.5), 0 0 40px var(--highlight-color) inset;
+    }
+}
 
-/* ... (Bagian ANIMASI SAMA seperti sebelumnya) ... */
+@keyframes glow {
+    from {
+        box-shadow: 
+            0 0 10px 5px var(--rose-glow),
+            0 0 40px 10px var(--rose-glow),
+            0 0 80px 20px rgba(0, 255, 255, 0.4);
+    }
+    to {
+        box-shadow: 
+            0 0 15px 8px var(--rose-glow),
+            0 0 60px 15px var(--rose-glow),
+            0 0 100px 30px rgba(0, 255, 255, 0.6);
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 0.5; }
+}
