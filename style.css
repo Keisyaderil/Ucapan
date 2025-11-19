@@ -1,0 +1,107 @@
+/*
+ * Style untuk Ucapan Ulang Tahun Julita - Murni CSS Shapes
+ */
+
+:root {
+    /* Variabel warna */
+    --navy-blue: #020436;      
+    --star-color: #ffe082;     
+    --text-color: #f0f4f7;     
+    --highlight-color: #00e0ff;
+    --card-bg: rgba(20, 20, 50, 0.5); 
+    --rose-glow: #00ffff; 
+    --rose-core: #0a1144; 
+    --petal-color: #0f1c6a; /* Warna kelopak biru gelap */
+    --petal-highlight: #4d90ff; /* Highlight kelopak */
+}
+
+/* ... (Bagian BODY, BINTANG, CARD, JUDUL, PESAN, TANDA TANGAN SAMA) ... */
+
+/* * EFEK MAWAR MURNI DARI CSS * */
+.css-rose-effect {
+    width: 200px; 
+    height: 200px;
+    border-radius: 50%; 
+    margin: 30px auto;
+    display: block;
+    position: relative;
+    overflow: hidden; 
+    
+    background: var(--rose-core); 
+    
+    /* Efek cahaya luar */
+    box-shadow: 
+        0 0 10px 5px var(--rose-glow),   
+        0 0 40px 10px var(--rose-glow),  
+        0 0 80px 20px rgba(0, 255, 255, 0.4); 
+
+    /* Tambahkan gradient untuk mensimulasikan kedalaman pusat mawar */
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+    
+    animation: glow 3s infinite alternate;
+}
+
+/* --- KELOPAK MAWAR DENGAN PSEUDO ELEMENTS --- */
+
+/* Perlu mengubah z-index kelopak agar foto bisa berada di antaranya */
+/* Kelopak Utama (::before) - Akan berada di lapisan paling belakang */
+.css-rose-effect::before {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; 
+    background-color: var(--petal-color);
+    top: -10%;
+    left: -10%;
+    transform: rotate(45deg);
+    box-shadow: 
+        inset 10px 10px 20px rgba(0, 0, 0, 0.7), 
+        inset -5px -5px 10px var(--petal-highlight); 
+    /* Z-index rendah untuk kelopak belakang */
+    z-index: 1;
+}
+
+/* Kelopak Tengah (::after) - Akan berada di lapisan tengah, di atas foto */
+.css-rose-effect::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border-radius: 30% 70% 50% 50% / 60% 40% 60% 40%; 
+    background-color: var(--petal-color);
+    top: 10%;
+    left: 10%;
+    transform: rotate(15deg);
+    box-shadow: 
+        inset 5px 5px 15px rgba(0, 0, 0, 0.8), 
+        inset -3px -3px 8px var(--petal-highlight);
+    background-image: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, transparent 40%);
+    /* Z-index tinggi untuk kelopak depan */
+    z-index: 3; 
+}
+
+/* --- STYLE BARU UNTUK FOTO DI TENGAH --- */
+.center-photo {
+    position: absolute;
+    /* Atur ukuran gambar (misalnya 50% dari ukuran .css-rose-effect) */
+    width: 50%; 
+    height: 50%;
+    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+    object-fit: cover; /* Memastikan gambar mengisi area tanpa terdistorsi */
+    
+    /* Pusatkan gambar */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* Atur Z-index agar berada di antara kelopak depan (::after) dan belakang (::before) */
+    z-index: 2; 
+
+    /* Tambahkan bingkai atau cahaya pada foto agar terlihat lebih menyatu */
+    border: 3px solid var(--highlight-color);
+    box-shadow: 0 0 10px var(--rose-glow), 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+
+/* ... (Bagian ANIMASI SAMA seperti sebelumnya) ... */
